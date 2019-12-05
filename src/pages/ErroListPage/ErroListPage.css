@@ -1,0 +1,30 @@
+.nav-input-item {
+  margin-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 15px;
+}
+
+.checkbox {
+  margin-left: 15px;
+}
+
+.erros-header {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.botao-acao {
+  margin-left: 15px;
+  padding: 5px !important;
+}
+
+.level-label-container {
+  text-align: center;
+  padding: 1px, 2px, 1px, 2px;
+}
+
+.level-label {
+  background-color: #dadada;
+  display: inline;
+}
