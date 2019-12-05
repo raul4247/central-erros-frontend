@@ -15,7 +15,8 @@ class Header extends Component {
     return (
       <div>
         <Navbar bg="light" expand="true">
-          <Navbar.Brand>Bem vindo {this.state.username}. Seu token é: {this.state.token}</Navbar.Brand>
+          <Navbar.Brand>Bem vindo {this.state.username}.</Navbar.Brand>
+          <Navbar.Brand> Seu token é: {this.state.token}</Navbar.Brand>
           <Navbar.Brand className="justify-content-end">
             <img
               src={require('./../../assets/imgs/profile_avatar.png')}
