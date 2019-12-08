@@ -15,6 +15,11 @@ class ErroListPage extends Component {
     { id: 98, level: 'Warning', titulo: 'Warning: lorem ipsum', endereco: '10.0.1.1', detalhes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', data: '21/05/2019 09:43:18', eventos: 350, tokenUsuario: 'sfg0246nk25i' }
   ]
 
+  constructor(props) {
+    super(props)
+    this.state = { access_token: props.location.state.access_token }
+  }
+
   findLogById(id) {
     return this.logsMock.find(log => log.id === id)
   }
@@ -30,7 +35,6 @@ class ErroListPage extends Component {
   buscarPorChange = (event) => {
     console.log(event.target.value)
   }
-
 
   buscaInputChange = (event) => {
     console.log(event.target.value)
@@ -50,7 +54,7 @@ class ErroListPage extends Component {
 
   showDetails = logId => e => {
     this.props.history.push({
-      pathname: '/details',
+      pathname: '/home/details',
       state: { log: this.findLogById(logId) }
     })
   }
