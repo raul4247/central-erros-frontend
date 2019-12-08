@@ -1,22 +1,51 @@
 import React, { Component } from "react"
-import { Nav, ButtonToolbar, Button, Row, Col } from 'react-bootstrap'
+import { Nav, ButtonToolbar, Button, Container, Row, Col } from 'react-bootstrap'
+import axios from 'axios'
+import { BACKEND_API } from '../../consts/Consts'
 import './ErroListPage.css'
 import '../App.css'
 
 
 class ErroListPage extends Component {
-  ambiente = ['Dev', 'Homologação', 'Produção']
+  ambiente = ['Todos', 'Dev', 'Homologação', 'Produção']
   ordenarPor = ['Ordenar por', 'Level', 'Frequência']
   buscarPor = ['Buscar por', 'Level', 'Descrição', 'Origem']
-  logsMock = [
-    { id: 1, level: 'Error', titulo: 'Null Pointer Exception', endereco: '10.0.1.1', detalhes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', data: '21/05/2019 09:43:18', eventos: 150, tokenUsuario: 'a1yd2bwsj1dswj' },
-    { id: 5, level: 'Error', titulo: 'Array Out of Bounds Exception', endereco: '10.0.1.1', detalhes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', data: '21/05/2019 09:43:18', eventos: 2, tokenUsuario: '1n23bgcr12eh' },
-    { id: 6, level: 'Debug', titulo: 'Debug log', endereco: '10.0.1.1', detalhes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', data: '21/05/2019 09:43:18', eventos: 50, tokenUsuario: 'xtndfb91v2' },
-    { id: 98, level: 'Warning', titulo: 'Warning: lorem ipsum', endereco: '10.0.1.1', detalhes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', data: '21/05/2019 09:43:18', eventos: 350, tokenUsuario: 'sfg0246nk25i' }
-  ]
+
+  constructor(props) {
+    super(props)
+    this.state = { accessToken: this.props.accessToken, logsPagina: [] }
+    this.carregaErros = this.carregaErros.bind(this)
+    this.findLogById = this.findLogById.bind(this)
+
+    this.carregaErros()
+  }
+
+  carregaErros() {
+    axios({
+      method: "GET",
+      url: BACKEND_API.SERVER_URL + '/erro',
+      headers: {
+        "authorization": 'Bearer ' + this.state.accessToken,
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "multipart/form-data"
+      }
+    })
+      .then(function (response) {
+        console.log(response)
+        if (response.status === 200) {
+          this.setState({ logsPagina: response.data.content })
+          console.log(this.state)
+        }
+      }.bind(this))
+      .catch(function (error) {
+        alert("ERRO!")
+        console.log(error)
+      })
+  }
 
   findLogById(id) {
-    return this.logsMock.find(log => log.id === id)
+    console.log(this.state)
+    return this.state.logsPagina.find(log => log.id === id)
   }
 
   ambienteChange = (event) => {
@@ -97,7 +126,7 @@ class ErroListPage extends Component {
             <Button className="botao-acao" variant="secondary" onClick={this.apagarClick}>Apagar</Button>
           </ButtonToolbar>
         </div>
-        <div>
+        <Container className="content">
           <Row className="erros-header">
             <Col md={1} sm={1} xs={1}>
               <input className="checkbox" type="checkbox" value="checkAll" onChange={this.checkboxClick} />
@@ -114,7 +143,7 @@ class ErroListPage extends Component {
           </Row>
           <hr />
           {
-            this.logsMock.map((log) => {
+            this.state.logsPagina.map((log) => {
               return (
                 <div key={log.id}>
                   <Row>
@@ -138,7 +167,7 @@ class ErroListPage extends Component {
               )
             })
           }
-        </div>
+        </Container>
       </div>
     )
   }

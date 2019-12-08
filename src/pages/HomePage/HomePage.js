@@ -10,7 +10,7 @@ import ErroDetailsPage from "../ErroDetailsPage/ErroDetailsPage"
 class HomePage extends Component {
   constructor(props) {
     super(props)
-    this.state = { access_token: props.location.state.access_token, email: props.location.state.email }
+    this.state = { accessToken: props.location.state.access_token, email: props.location.state.email }
     this.carregarUserData = this.carregarUserData.bind(this)
 
     this.carregarUserData()
@@ -21,17 +21,14 @@ class HomePage extends Component {
       method: "GET",
       url: BACKEND_API.SERVER_URL + '/usuario/email/' + this.state.email,
       headers: {
-        "authorization": 'Bearer ' + this.state.access_token,
+        "authorization": 'Bearer ' + this.state.accessToken,
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "multipart/form-data"
       }
     })
       .then(function (response) {
-        console.log(response)
-        if (response.status === 200) {
+        if (response.status === 200)
           this.setState({ userData: response.data })
-        }
-
       }.bind(this))
       .catch(function (error) {
         alert("ERRO!")
@@ -43,7 +40,7 @@ class HomePage extends Component {
       <div>
         <Header userData={this.state.userData} history={this.props.history} />
         <Switch>
-          <Route exact path='/home' component={ErroListPage} />
+          <Route exact path='/home' render={(props) => <ErroListPage {...props} accessToken={this.state.accessToken} />} />
           <Route exact path='/home/details' component={ErroDetailsPage} />
         </Switch>
       </div>
