@@ -1,0 +1,30 @@
+.login-container {
+  min-height: 100vh;
+  background: #0bc3bf;
+  background: -webkit-linear-gradient(to bottom right, #0bc3bf, #b0f4e6);
+  background: linear-gradient(to right, #0bc3bf, #b0f4e6);
+}
+
+.login-card {
+  margin: 0 auto;
+  width: 30em;
+}
+
+.input-box-container {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.input-box {
+  margin-bottom: 1rem;
+  width: 18rem !important;
+  margin: 15px auto 15px auto;
+}
+
+.btn-login-container {
+  text-align: center;
+}
+
+.btn-login {
+  margin-bottom: 15px;
+}

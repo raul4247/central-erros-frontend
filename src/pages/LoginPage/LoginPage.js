@@ -2,8 +2,7 @@ import React, { Component } from "react"
 import axios from 'axios'
 import { BACKEND_API } from '../../consts/Consts'
 import FormDataSend from '../../api/FormDataSend'
-import { Button } from 'react-bootstrap'
-
+import './LoginPage.css'
 
 class LoginPage extends Component {
   constructor(props) {
@@ -43,7 +42,7 @@ class LoginPage extends Component {
       .then(function (response) {
         console.log(response)
         if (response.status === 200) {
-          this.props.history.replace({
+          this.props.history.push({
             pathname: '/home',
             state: { access_token: response.data.access_token, email: this.state.username }
           })
@@ -55,13 +54,29 @@ class LoginPage extends Component {
       })
   }
 
+  esqueciSenha() {
+    alert("???")
+  }
+
   render() {
     return (
-      <div>
-        <p>LOGIN</p>
-        <input type="text" value={this.state.username} onChange={this.usernameChange} />
-        <input type="password" value={this.state.password} onChange={this.passwordChange} />
-        <Button className="botao-acao" variant="secondary" onClick={this.login}>Login</Button>
+      <div className="login-container container-fluid d-flex flex-column">
+        <div className="card border-0 shadow login-card my-5">
+          <div className="card-body">
+            <h1 className="font-weight-light text-center">Central de Erros</h1>
+            <p className="lead text-center">Bem vindo a central de erros do Squad 6!</p>
+            <p className="lead text-center">AceleraDev JAVA - Codenation</p>
+            <div className="input-box-container">
+              <input className="form-control text-center input-box" type="text" placeholder="Email" value={this.state.username} onChange={this.usernameChange} />
+              <input className="form-control text-center input-box" type="password" value={this.state.password} onChange={this.passwordChange} />
+            </div>
+            <div className="btn-login-container">
+              <button type="button" className="btn btn-outline-success btn-login" onClick={this.login}>Login</button>
+              <br />
+              <button type="button" className="btn btn-link" onClick={this.esqueciSenha}>Esqueci minha senha</button>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
