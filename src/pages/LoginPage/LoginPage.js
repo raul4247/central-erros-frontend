@@ -32,7 +32,7 @@ class LoginPage extends Component {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/oauth/token',
+      url: BACKEND_API.AUTH_ENDPOINT,
       headers: {
         "authorization": BACKEND_API.BASIC_AUTH,
         "Access-Control-Allow-Origin": "*",
