@@ -1,1 +1,1 @@
-export const BACKEND_API = { BASIC_AUTH: "Basic Y29kZW5hdGlvbjpjb2RlbmF0aW9u", AUTH_ENDPOINT: "http://localhost:8080/oauth/token" } 
+export const BACKEND_API = { BASIC_AUTH: "Basic Y29kZW5hdGlvbjpjb2RlbmF0aW9u", SERVER_URL: "http://localhost:8080" } 

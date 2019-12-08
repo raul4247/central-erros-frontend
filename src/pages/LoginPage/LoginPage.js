@@ -32,7 +32,7 @@ class LoginPage extends Component {
 
     axios({
       method: "POST",
-      url: BACKEND_API.AUTH_ENDPOINT,
+      url: BACKEND_API.SERVER_URL + '/oauth/token',
       headers: {
         "authorization": BACKEND_API.BASIC_AUTH,
         "Access-Control-Allow-Origin": "*",
@@ -41,10 +41,11 @@ class LoginPage extends Component {
       data: form
     })
       .then(function (response) {
+        console.log(response)
         if (response.status === 200) {
           this.props.history.replace({
             pathname: '/home',
-            state: { access_token: response.data.access_token }
+            state: { access_token: response.data.access_token, email: this.state.username }
           })
         }
       }.bind(this))

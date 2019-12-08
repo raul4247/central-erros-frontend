@@ -1,15 +1,47 @@
 import React, { Component } from "react"
 import { Route, Switch } from "react-router-dom"
 import Header from "../../components/Header/Header"
+import axios from 'axios'
+import { BACKEND_API } from '../../consts/Consts'
 import ErroListPage from "../ErroListPage/ErroListPage"
 import ErroDetailsPage from "../ErroDetailsPage/ErroDetailsPage"
 
 
 class HomePage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { access_token: props.location.state.access_token, email: props.location.state.email }
+    this.carregarUserData = this.carregarUserData.bind(this)
+
+    this.carregarUserData()
+  }
+
+  carregarUserData() {
+    axios({
+      method: "GET",
+      url: BACKEND_API.SERVER_URL + '/usuario/email/' + this.state.email,
+      headers: {
+        "authorization": 'Bearer ' + this.state.access_token,
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "multipart/form-data"
+      }
+    })
+      .then(function (response) {
+        console.log(response)
+        if (response.status === 200) {
+          this.setState({ userData: response.data })
+        }
+
+      }.bind(this))
+      .catch(function (error) {
+        alert("ERRO!")
+        console.log(error)
+      })
+  }
   render() {
     return (
       <div>
-        <Header />
+        <Header userData={this.state.userData} history={this.props.history} />
         <Switch>
           <Route exact path='/home' component={ErroListPage} />
           <Route exact path='/home/details' component={ErroDetailsPage} />
