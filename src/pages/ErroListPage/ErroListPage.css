@@ -6,6 +6,54 @@
 }
 
 .erros-header {
+  line-height: 30px;
+  height: 30px;
+}
+
+.erros-header-label {
+  font-weight: 500 !important;
+  font-style: italic;
+}
+
+.erros-card {
+  margin: 0 auto;
+  width: 80rem;
+}
+
+.nav-item {
   margin-top: 15px;
-  margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+  .nav-select {
+    justify-content: left !important;
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .nav-select {
+    justify-content: center !important;
+  }
+}
+
+.content {
+  margin-top: 30px;
+  background-color: #ffffff;
+}
+
+.checkbox {
+  text-align: center;
+}
+
+.level-label-container {
+  text-align: center;
+}
+
+.level-label {
+  padding: 5px 10px 5px 10px !important;
+}
+
+.log {
+  font-weight: 300;
 }

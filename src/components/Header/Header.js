@@ -29,16 +29,16 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <nav class="navbar navbar-expand-md bg-light">
-          <ul class="navbar-nav nav-fill w-100 flex-md-row">
-            <li class="nav-item nome-item">
-              <p class="nome">Bem vindo {this.state.nome}</p>
+        <nav className="navbar navbar-expand-md bg-light">
+          <ul className="navbar-nav nav-fill w-100 flex-md-row">
+            <li className="nav-item nome-item">
+              <p className="nome font-weight-light">Bem vindo {this.state.nome}</p>
             </li>
-            <li class="nav-item token-item">
-              <p class="token"><span class="bold-label">Token:</span> {this.state.token}</p>
+            <li className="nav-item token-item">
+              <p className="token"><span className="bold-label">Token:</span> {this.state.token}</p>
             </li>
-            <li class="nav-item logout-item">
-              <button type="button" class="btn btn-link btn-logout" onClick={this.logout}>Logout</button>
+            <li className="nav-item logout-item">
+              <button type="button" className="btn btn-link btn-logout" onClick={this.logout}>Logout</button>
             </li>
           </ul>
         </nav>

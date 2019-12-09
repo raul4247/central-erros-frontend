@@ -68,7 +68,7 @@ class LoginPage extends Component {
             <p className="lead text-center">AceleraDev JAVA - Codenation</p>
             <div className="input-box-container">
               <input className="form-control text-center input-box" type="text" placeholder="Email" value={this.state.username} onChange={this.usernameChange} />
-              <input className="form-control text-center input-box" type="password" value={this.state.password} onChange={this.passwordChange} />
+              <input className="form-control text-center input-box" type="password" placeholder="Senha" value={this.state.password} onChange={this.passwordChange} />
             </div>
             <div className="btn-login-container">
               <button type="button" className="btn btn-outline-success btn-login" onClick={this.login}>Login</button>
