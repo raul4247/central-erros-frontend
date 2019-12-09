@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { Navbar, Button } from 'react-bootstrap'
 import './Header.css'
 
 class Header extends Component {
@@ -15,7 +14,7 @@ class Header extends Component {
 
   static getDerivedStateFromProps(props) {
     if (props.userData !== undefined)
-      return { nome: props.userData.nome, token: props.userData.token, email: props.userData.email }
+      return { nome: props.userData.nome, token: props.userData.token }
 
     return null;
   }
