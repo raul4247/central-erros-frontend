@@ -30,31 +30,19 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <Navbar bg="light" expand="true">
-          <Navbar.Brand>Bem vindo {this.state.nome}.</Navbar.Brand>
-          <Navbar.Brand> Seu token é: {this.state.token}</Navbar.Brand>
-          <Navbar.Brand className="justify-content-end">
-            <div>
-              <div className="dropleft">
-                <a href="/#" data-toggle="dropdown">
-                  <img
-                    src={require('./../../assets/imgs/profile_avatar.png')}
-                    width="30"
-                    height="30"
-                    alt="Perfil"
-                  />
-                </a>
-                <div className="dropdown-menu">
-                  <p>Nome: {this.state.nome}</p>
-                  <p>Email: {this.state.email}</p>
-                  <p>Token: {this.state.token}</p>
-                  <Button className="botao-acao" variant="secondary" onClick={this.logout}>Sair</Button>
-                </div>
-              </div>
-            </div>
-
-          </Navbar.Brand>
-        </Navbar>
+        <nav class="navbar navbar-expand-md bg-light">
+          <ul class="navbar-nav nav-fill w-100 flex-md-row">
+            <li class="nav-item nome-item">
+              <p class="nome">Bem vindo {this.state.nome}</p>
+            </li>
+            <li class="nav-item token-item">
+              <p class="token"><span class="bold-label">Token:</span> {this.state.token}</p>
+            </li>
+            <li class="nav-item logout-item">
+              <button type="button" class="btn btn-link btn-logout" onClick={this.logout}>Logout</button>
+            </li>
+          </ul>
+        </nav>
       </div>
     )
   }

@@ -2,7 +2,7 @@
   min-height: 100vh;
   background: #0bc3bf;
   background: -webkit-linear-gradient(to bottom right, #0bc3bf, #b0f4e6);
-  background: linear-gradient(to right, #0bc3bf, #b0f4e6);
+  background: linear-gradient(to bottom right, #0bc3bf, #b0f4e6);
 }
 
 .login-card {
@@ -26,5 +26,6 @@
 }
 
 .btn-login {
+  width: 18rem !important;
   margin-bottom: 15px;
 }

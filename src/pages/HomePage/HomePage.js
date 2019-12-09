@@ -5,7 +5,7 @@ import axios from 'axios'
 import { BACKEND_API } from '../../consts/Consts'
 import ErroListPage from "../ErroListPage/ErroListPage"
 import ErroDetailsPage from "../ErroDetailsPage/ErroDetailsPage"
-
+import './HomePage.css'
 
 class HomePage extends Component {
   constructor(props) {
@@ -35,14 +35,17 @@ class HomePage extends Component {
         console.log(error)
       })
   }
+
   render() {
     return (
       <div>
         <Header userData={this.state.userData} history={this.props.history} />
-        <Switch>
-          <Route exact path='/home' render={(props) => <ErroListPage {...props} accessToken={this.state.accessToken} />} />
-          <Route exact path='/home/details' component={ErroDetailsPage} />
-        </Switch>
+        <div className="homepage-container">
+          <Switch>
+            <Route exact path='/home' render={(props) => <ErroListPage {...props} accessToken={this.state.accessToken} />} />
+            <Route exact path='/home/details' component={ErroDetailsPage} />
+          </Switch>
+        </div>
       </div>
     )
   }
