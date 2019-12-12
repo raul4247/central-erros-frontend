@@ -8,10 +8,6 @@ class Header extends Component {
     this.logout = this.logout.bind(this)
   }
 
-  showPerfilPopUp() {
-    console.log('pop up')
-  }
-
   static getDerivedStateFromProps(props) {
     if (props.userData !== undefined)
       return { nome: props.userData.nome, token: props.userData.token }
@@ -20,7 +16,6 @@ class Header extends Component {
   }
 
   logout() {
-    console.log(this.props)
     this.props.history.replace({
       pathname: '/'
     })

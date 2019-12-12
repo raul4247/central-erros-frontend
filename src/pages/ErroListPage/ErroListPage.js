@@ -21,6 +21,7 @@ class ErroListPage extends Component {
     this.levelClass = this.levelClass.bind(this)
     this.initSelectedCheckBoxes = this.initSelectedCheckBoxes.bind(this)
     this.updateStatusClick = this.updateStatusClick.bind(this)
+    this.erroNaRequisicao = this.erroNaRequisicao.bind(this)
 
     this.carregaErros()
   }
@@ -41,9 +42,8 @@ class ErroListPage extends Component {
         }
       }.bind(this))
       .catch(function (error) {
-        alert("ERRO!")
-        console.log(error)
-      })
+        this.erroNaRequisicao(error)
+      }.bind(this))
   }
 
   initSelectedCheckBoxes() {
@@ -85,31 +85,29 @@ class ErroListPage extends Component {
   }
 
   updateStatusClick = (statusCode) => {
-    console.log('hey')
-
     let logsIds = this.getCheckedBoxes()
-
-    axios({
-      method: "PUT",
-      url: BACKEND_API.SERVER_URL + '/erro/updateStatus/' + statusCode,
-      headers: {
-        "authorization": 'Bearer ' + this.state.accessToken,
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      },
-      data: logsIds
-    })
-      .then(function (response) {
-        if (response.status === 204) {
-          this.initSelectedCheckBoxes()
-          this.carregaErros()
-          alert("Sucesso!")
-        }
-      }.bind(this))
-      .catch(function (error) {
-        alert("Erro!")
-        console.log(error)
+    if (logsIds.length > 0) {
+      axios({
+        method: "PUT",
+        url: BACKEND_API.SERVER_URL + '/erro/updateStatus/' + statusCode,
+        headers: {
+          "authorization": 'Bearer ' + this.state.accessToken,
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json"
+        },
+        data: logsIds
       })
+        .then(function (response) {
+          if (response.status === 204) {
+            this.initSelectedCheckBoxes()
+            this.carregaErros()
+            alert("Sucesso!")
+          }
+        }.bind(this))
+        .catch(function (error) {
+          this.erroNaRequisicao(error)
+        }.bind(this))
+    }
   }
 
   checkboxClick = (event) => {
@@ -134,6 +132,14 @@ class ErroListPage extends Component {
       pathname: '/home/details',
       state: { log: this.findLogById(logId) }
     })
+  }
+
+  erroNaRequisicao(errorMsg) {
+    console.log(errorMsg)
+    this.props.history.replace({
+      pathname: '/'
+    })
+    alert("Descupe, ocorreu um erro")
   }
 
   render() {
