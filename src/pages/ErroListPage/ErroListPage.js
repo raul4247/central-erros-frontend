@@ -169,21 +169,26 @@ class ErroListPage extends Component {
           <button type="button" className="btn btn-danger botao-acao" onClick={this.updateStatusClick.bind(this, 'APAGADO')}>Apagar</button>
         </div>
         <div className="container-fluid content">
-          <div className="row erros-header">
-            <div className="col-1 text-center">
-              <input type="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
+          {
+            this.state.logsPagina > 0 &&
+            <div className="row erros-header">
+              <div className="col-1 text-center">
+                <input type="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
+              </div>
+              <div className="col text-center">
+                <p className="erros-header-label">Level</p>
+              </div>
+              <div className="col text-center">
+                <p className="erros-header-label">Log</p>
+              </div>
+              <div className="col text-center">
+                <p className="erros-header-label">Eventos</p>
+              </div>
             </div>
-            <div className="col text-center">
-              <p className="erros-header-label">Level</p>
-            </div>
-            <div className="col text-center">
-              <p className="erros-header-label">Log</p>
-            </div>
-            <div className="col text-center">
-              <p className="erros-header-label">Eventos</p>
-            </div>
-          </div>
-          <hr />
+          }
+          {
+            this.state.logsPagina > 0 && <hr />
+          }
           {
             this.state.logsPagina.map((log, index) => {
               return (
@@ -192,7 +197,6 @@ class ErroListPage extends Component {
                     <div className="col-1 text-center">
                       <input type="checkbox" checked={this.state.selectedCheckBoxes[index]} value={index} onChange={this.checkboxClick} />
                     </div>
-                    {/* onClick={this.showDetails.bind(this) */}
                     <LevelLabel log={log} history={this.props.history} onPress={this.showDetails.bind(this)} />
                     <div className="col text-center" onPress={this.showDetails.bind(this)}>
                       <p className="log">{log.titulo}</p>
@@ -207,6 +211,12 @@ class ErroListPage extends Component {
                 </div>
               )
             })
+          }
+          {
+            (this.state.logsPagina <= 0) &&
+            <div className="container-fluid content nenhum-erro">
+              <h1 className="font-weight-light text-center">Não foram encontrados nenhum erro!</h1>
+            </div>
           }
         </div>
       </div>

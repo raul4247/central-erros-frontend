@@ -3,22 +3,8 @@
   margin-right: 30px;
 }
 
-.input-box-container {
-  margin-top: 30px;
-  margin-bottom: 15px;
-}
-
-.input-box {
-  margin-bottom: 1rem;
-  width: 18rem !important;
-  margin: 15px auto 15px auto;
-}
-
-.btn-login-container {
-  text-align: center;
-}
-
-.btn-login {
-  width: 18rem !important;
-  margin-bottom: 15px;
+.botao-acao {
+  margin-top: 15px;
+  margin-left: 15px;
+  padding: 5px !important;
 }
