@@ -3,7 +3,7 @@ import './Header.css'
 
 class Header extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { nome: 'USUÁRIO', token: 'TOKEN', email: 'EMAIL' }
     this.logout = this.logout.bind(this)
   }
@@ -12,7 +12,7 @@ class Header extends Component {
     if (props.userData !== undefined)
       return { nome: props.userData.nome, token: props.userData.token }
 
-    return null;
+    return null
   }
 
   logout() {

@@ -42,18 +42,12 @@
   background-color: #ffffff;
 }
 
-.checkbox {
-  text-align: center;
-}
-
-.level-label-container {
-  text-align: center;
-}
-
-.level-label {
-  padding: 5px 10px 5px 10px !important;
-}
-
 .log {
   font-weight: 300;
+}
+
+.botao-acao {
+  margin-top: 15px;
+  margin-left: 15px;
+  padding: 5px !important;
 }

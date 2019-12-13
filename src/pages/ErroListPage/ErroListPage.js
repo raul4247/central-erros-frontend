@@ -1,9 +1,8 @@
 import React, { Component } from "react"
 import axios from 'axios'
 import { BACKEND_API } from '../../consts/Consts'
+import LevelLabel from '../../components/LevelLabel/LevelLabel'
 import './ErroListPage.css'
-import '../App.css'
-
 
 class ErroListPage extends Component {
   ambiente = ['Todos', 'Dev', 'Homologação', 'Produção']
@@ -18,7 +17,6 @@ class ErroListPage extends Component {
     this.state = { accessToken: this.props.accessToken, logsPagina: [], checkAll: false, selectedCheckBoxes: selected }
     this.carregaErros = this.carregaErros.bind(this)
     this.findLogById = this.findLogById.bind(this)
-    this.levelClass = this.levelClass.bind(this)
     this.initSelectedCheckBoxes = this.initSelectedCheckBoxes.bind(this)
     this.updateStatusClick = this.updateStatusClick.bind(this)
     this.erroNaRequisicao = this.erroNaRequisicao.bind(this)
@@ -49,16 +47,6 @@ class ErroListPage extends Component {
   initSelectedCheckBoxes() {
     let selected = Array(this.pageSize).fill(false)
     this.setState({ checkAll: false, selectedCheckBoxes: selected })
-  }
-
-  levelClass(level) {
-    if (level === "WARNING")
-      return "-warning"
-    if (level === "DEBUG")
-      return "-primary"
-    if (level === "ERROR")
-      return "-danger"
-    return ""
   }
 
   findLogById(id) {
@@ -127,13 +115,6 @@ class ErroListPage extends Component {
     }
   }
 
-  showDetails = logId => e => {
-    this.props.history.push({
-      pathname: '/home/details',
-      state: { log: this.findLogById(logId) }
-    })
-  }
-
   erroNaRequisicao(errorMsg) {
     console.log(errorMsg)
     this.props.history.replace({
@@ -180,8 +161,8 @@ class ErroListPage extends Component {
         </div>
         <div className="container-fluid content">
           <div className="row erros-header">
-            <div className="col-1 checkbox">
-              <input className="checkbox" type="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
+            <div className="col-1 text-center">
+              <input type="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
             </div>
             <div className="col text-center">
               <p className="erros-header-label">Level</p>
@@ -199,12 +180,10 @@ class ErroListPage extends Component {
               return (
                 <div key={log.id}>
                   <div className="row">
-                    <div className="col-1 checkbox">
-                      <input className="checkbox" type="checkbox" checked={this.state.selectedCheckBoxes[index]} value={index} onChange={this.checkboxClick} />
+                    <div className="col-1 text-center">
+                      <input type="checkbox" checked={this.state.selectedCheckBoxes[index]} value={index} onChange={this.checkboxClick} />
                     </div>
-                    <div className="col level-label-container" onClick={this.showDetails(log.id)}>
-                      <p className={"badge badge-pill level-label badge" + this.levelClass(log.level)}>{log.level}</p>
-                    </div>
+                    <LevelLabel log={log} history={this.props.history} />
                     <div className="col text-center">
                       <p className="log">{log.titulo}</p>
                       <p className="log">{log.endereco}</p>

@@ -31,9 +31,12 @@ class HomePage extends Component {
           this.setState({ userData: response.data })
       }.bind(this))
       .catch(function (error) {
-        alert("ERRO!")
         console.log(error)
-      })
+        this.props.history.replace({
+          pathname: '/'
+        })
+        alert("Descupe, ocorreu um erro")
+      }.bind(this))
   }
 
   render() {
