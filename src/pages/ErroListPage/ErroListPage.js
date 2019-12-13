@@ -170,7 +170,7 @@ class ErroListPage extends Component {
         </div>
         <div className="container-fluid content">
           {
-            this.state.logsPagina > 0 &&
+            this.state.logsPagina.length > 0 &&
             <div className="row erros-header">
               <div className="col-1 text-center">
                 <input type="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
@@ -187,23 +187,23 @@ class ErroListPage extends Component {
             </div>
           }
           {
-            this.state.logsPagina > 0 && <hr />
+            this.state.logsPagina.length > 0 && <hr />
           }
           {
             this.state.logsPagina.map((log, index) => {
               return (
                 <div key={log.id}>
-                  <div className="row" onClick={this.showDetails(log.id)}>
+                  <div className="row">
                     <div className="col-1 text-center">
                       <input type="checkbox" checked={this.state.selectedCheckBoxes[index]} value={index} onChange={this.checkboxClick} />
                     </div>
-                    <LevelLabel log={log} history={this.props.history} onPress={this.showDetails.bind(this)} />
-                    <div className="col text-center" onPress={this.showDetails.bind(this)}>
+                    <LevelLabel log={log} history={this.props.history} onClick={this.showDetails(log.id)} />
+                    <div className="col text-center" onClick={this.showDetails(log.id)}>
                       <p className="log">{log.titulo}</p>
                       <p className="log">{log.endereco}</p>
                       <p className="log">{log.data}</p>
                     </div>
-                    <div className="col text-center" onPress={this.showDetails.bind(this)} >
+                    <div className="col text-center" onClick={this.showDetails(log.id)} >
                       <p className="log">{log.eventos}</p>
                     </div>
                   </div>
@@ -213,13 +213,13 @@ class ErroListPage extends Component {
             })
           }
           {
-            (this.state.logsPagina <= 0) &&
+            (this.state.logsPagina.length === 0) &&
             <div className="container-fluid content nenhum-erro">
               <h1 className="font-weight-light text-center">Não foram encontrados nenhum erro!</h1>
             </div>
           }
         </div>
-      </div>
+      </div >
     )
   }
 }
