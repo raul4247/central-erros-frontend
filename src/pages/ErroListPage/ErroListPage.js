@@ -20,6 +20,7 @@ class ErroListPage extends Component {
     this.initSelectedCheckBoxes = this.initSelectedCheckBoxes.bind(this)
     this.updateStatusClick = this.updateStatusClick.bind(this)
     this.erroNaRequisicao = this.erroNaRequisicao.bind(this)
+    this.showDetails = this.showDetails.bind(this)
 
     this.carregaErros()
   }
@@ -71,6 +72,14 @@ class ErroListPage extends Component {
     })
     return logIds.map((log) => log.id)
   }
+
+  showDetails = logId => e => {
+    this.props.history.push({
+      pathname: '/home/details',
+      state: { log: this.findLogById(logId) }
+    })
+  }
+
 
   updateStatusClick = (statusCode) => {
     let logsIds = this.getCheckedBoxes()
@@ -179,17 +188,18 @@ class ErroListPage extends Component {
             this.state.logsPagina.map((log, index) => {
               return (
                 <div key={log.id}>
-                  <div className="row">
+                  <div className="row" onClick={this.showDetails(log.id)}>
                     <div className="col-1 text-center">
                       <input type="checkbox" checked={this.state.selectedCheckBoxes[index]} value={index} onChange={this.checkboxClick} />
                     </div>
-                    <LevelLabel log={log} history={this.props.history} />
-                    <div className="col text-center">
+                    {/* onClick={this.showDetails.bind(this) */}
+                    <LevelLabel log={log} history={this.props.history} onPress={this.showDetails.bind(this)} />
+                    <div className="col text-center" onPress={this.showDetails.bind(this)}>
                       <p className="log">{log.titulo}</p>
                       <p className="log">{log.endereco}</p>
                       <p className="log">{log.data}</p>
                     </div>
-                    <div className="col text-center">
+                    <div className="col text-center" onPress={this.showDetails.bind(this)} >
                       <p className="log">{log.eventos}</p>
                     </div>
                   </div>
