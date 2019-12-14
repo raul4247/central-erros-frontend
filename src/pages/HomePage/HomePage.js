@@ -33,7 +33,7 @@ class HomePage extends Component {
       .catch(function (error) {
         console.log(error)
         this.props.history.replace({
-          pathname: '/'
+          pathname: '/central-erros-frontend'
         })
         alert("Descupe, ocorreu um erro")
       }.bind(this))
@@ -45,8 +45,8 @@ class HomePage extends Component {
         <Header userData={this.state.userData} history={this.props.history} />
         <div className="homepage-container">
           <Switch>
-            <Route exact path='/home' render={(props) => <ErroListPage {...props} accessToken={this.state.accessToken} />} />
-            <Route exact path='/home/details' component={ErroDetailsPage} />
+            <Route exact path='/central-erros-frontend/home' render={(props) => <ErroListPage {...props} accessToken={this.state.accessToken} />} />
+            <Route exact path='/central-erros-frontend/home/details' component={ErroDetailsPage} />
           </Switch>
         </div>
       </div>

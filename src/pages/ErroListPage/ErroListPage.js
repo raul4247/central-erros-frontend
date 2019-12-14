@@ -75,11 +75,10 @@ class ErroListPage extends Component {
 
   showDetails = logId => e => {
     this.props.history.push({
-      pathname: '/home/details',
+      pathname: '/central-erros-frontend/home/details',
       state: { log: this.findLogById(logId) }
     })
   }
-
 
   updateStatusClick = (statusCode) => {
     let logsIds = this.getCheckedBoxes()
@@ -127,7 +126,7 @@ class ErroListPage extends Component {
   erroNaRequisicao(errorMsg) {
     console.log(errorMsg)
     this.props.history.replace({
-      pathname: '/'
+      pathname: '/central-erros-frontend'
     })
     alert("Descupe, ocorreu um erro")
   }
@@ -219,7 +218,7 @@ class ErroListPage extends Component {
             </div>
           }
         </div>
-      </div >
+      </div>
     )
   }
 }

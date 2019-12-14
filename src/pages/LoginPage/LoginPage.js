@@ -43,7 +43,7 @@ class LoginPage extends Component {
         console.log(response)
         if (response.status === 200) {
           this.props.history.push({
-            pathname: '/home',
+            pathname: '/central-erros-frontend/home',
             state: { access_token: response.data.access_token, email: this.state.username }
           })
         }
