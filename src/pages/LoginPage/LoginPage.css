@@ -7,7 +7,39 @@
 
 .login-card {
   margin: 0 auto;
-  width: 30em;
+}
+
+.input-box {
+  margin-bottom: 1rem;
+  margin: 15px auto 15px auto;
+}
+
+.btn-login {
+  width: 100% !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .login-card {
+    width: 30em;
+  }
+  .input-box {
+    width: 18rem !important;
+  }
+  .btn-login {
+    width: 18rem !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .login-card {
+    width: 100%;
+  }
+  .input-box {
+    width: 100% !important;
+  }
+  .btn-login {
+    width: 100% !important;
+  }
 }
 
 .input-box-container {
@@ -15,17 +47,6 @@
   margin-bottom: 15px;
 }
 
-.input-box {
-  margin-bottom: 1rem;
-  width: 18rem !important;
-  margin: 15px auto 15px auto;
-}
-
 .btn-login-container {
   text-align: center;
-}
-
-.btn-login {
-  width: 18rem !important;
-  margin-bottom: 15px;
 }

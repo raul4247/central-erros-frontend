@@ -54,10 +54,6 @@ class LoginPage extends Component {
       })
   }
 
-  esqueciSenha() {
-    alert("???")
-  }
-
   render() {
     return (
       <div className="login-container container-fluid d-flex flex-column">
@@ -73,7 +69,7 @@ class LoginPage extends Component {
             <div className="btn-login-container">
               <button type="button" className="btn btn-outline-success btn-login" onClick={this.login}>Login</button>
               <br />
-              <button type="button" className="btn btn-link" onClick={this.esqueciSenha}>Esqueci minha senha</button>
+              <button type="button" className="btn btn-link">Esqueci minha senha</button>
             </div>
           </div>
         </div>

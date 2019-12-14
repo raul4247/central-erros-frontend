@@ -17,7 +17,7 @@ class Header extends Component {
 
   logout() {
     this.props.history.replace({
-      pathname: '/'
+      pathname: '/central-erros-frontend'
     })
   }
 
