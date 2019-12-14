@@ -76,6 +76,26 @@ class ErroListPage extends Component {
 
   ordenarPorChange = (event) => {
     console.log(event.target.value)
+    if (event.target.value === "Ordenar por") {
+      if (this.state.ambiente === "TODOS") {
+        this.carregaErros("")
+      }
+      else {
+        this.carregaErros('/ambiente/' + this.state.ambiente)
+      }
+    }
+    else {
+      if (this.state.ambiente === "TODOS") {
+        this.carregaErros('?sort=' + event.target.value + ',asc')
+      }
+      else {
+        this.carregaErros('/ambiente/' + this.state.ambiente + '?sort=' + event.target.value + ',asc')
+      }
+    }
+
+    this.setState({ selectedCheckBoxes: Array(this.pageSize).fill(false), checkAll: false })
+    console.log(this.state.ambiente)
+
   }
 
   buscarPorChange = (event) => {

@@ -34,6 +34,7 @@ class HomePage extends Component {
       }
     })
       .then(function (response) {
+        console.log(response)
         if (response.status === 200)
           this.setState({ userData: response.data })
       }.bind(this))
