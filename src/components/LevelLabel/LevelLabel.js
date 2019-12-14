@@ -21,6 +21,8 @@ class LevelLabel extends Component {
       return "-primary"
     if (level === "ERROR")
       return "-danger"
+    if (level === "INFO")
+      return "-success"
     return ""
   }
 

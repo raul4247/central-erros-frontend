@@ -1,0 +1,23 @@
+.btn-criar-erro {
+  margin-bottom: 10px;
+}
+
+.btns-card {
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .btns-card {
+    width: 30em;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .btns-card {
+    width: 100%;
+  }
+}
+
+.endereco-input {
+  margin-bottom: 16px;
+}

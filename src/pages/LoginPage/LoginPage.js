@@ -40,7 +40,6 @@ class LoginPage extends Component {
       data: form
     })
       .then(function (response) {
-        console.log(response)
         if (response.status === 200) {
           this.props.history.push({
             pathname: '/central-erros-frontend/home',

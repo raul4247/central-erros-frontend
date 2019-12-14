@@ -14,15 +14,23 @@ class ErroListPage extends Component {
     super(props)
 
     let selected = Array(this.pageSize).fill(false)
-    this.state = { accessToken: this.props.accessToken, logsPagina: [], checkAll: false, selectedCheckBoxes: selected }
+    this.state = { accessToken: this.props.accessToken, userData: this.props.userData, logsPagina: [], checkAll: false, selectedCheckBoxes: selected }
     this.carregaErros = this.carregaErros.bind(this)
     this.findLogById = this.findLogById.bind(this)
     this.initSelectedCheckBoxes = this.initSelectedCheckBoxes.bind(this)
     this.updateStatusClick = this.updateStatusClick.bind(this)
     this.erroNaRequisicao = this.erroNaRequisicao.bind(this)
     this.showDetails = this.showDetails.bind(this)
+    this.criarErros = this.criarErros.bind(this)
 
     this.carregaErros()
+  }
+
+  static getDerivedStateFromProps(props) {
+    if (props.userData !== undefined)
+      return { userData: props.userData }
+
+    return null
   }
 
   carregaErros() {
@@ -131,6 +139,13 @@ class ErroListPage extends Component {
     alert("Descupe, ocorreu um erro")
   }
 
+  criarErros() {
+    this.props.history.push({
+      pathname: '/central-erros-frontend/home/criar',
+      state: { userData: this.state.userData, accessToken: this.state.accessToken }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -165,6 +180,7 @@ class ErroListPage extends Component {
         </div>
         <div>
           <button type="button" className="btn btn-warning botao-acao" onClick={this.updateStatusClick.bind(this, 'ARQUIVADO')}>Arquivar</button>
+          <button type="button" className="btn btn-success botao-acao" onClick={this.criarErros}>Inserir Novos Erros</button>
         </div>
         <div className="container-fluid content">
           {
