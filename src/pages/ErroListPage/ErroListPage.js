@@ -165,7 +165,6 @@ class ErroListPage extends Component {
         </div>
         <div>
           <button type="button" className="btn btn-warning botao-acao" onClick={this.updateStatusClick.bind(this, 'ARQUIVADO')}>Arquivar</button>
-          <button type="button" className="btn btn-danger botao-acao" onClick={this.updateStatusClick.bind(this, 'APAGADO')}>Apagar</button>
         </div>
         <div className="container-fluid content">
           {
