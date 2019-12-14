@@ -5,7 +5,7 @@ import LevelLabel from '../../components/LevelLabel/LevelLabel'
 import './ErroListPage.css'
 
 class ErroListPage extends Component {
-  ambiente = ['Todos', 'Dev', 'Homologação', 'Produção']
+  ambiente = ['TODOS', 'DEV', 'HOMOLOGACAO', 'PRODUCAO']
   ordenarPor = ['Ordenar por', 'Level', 'Frequência']
   buscarPor = ['Buscar por', 'Level', 'Descrição', 'Origem']
   pageSize = 8
@@ -14,7 +14,7 @@ class ErroListPage extends Component {
     super(props)
 
     let selected = Array(this.pageSize).fill(false)
-    this.state = { accessToken: this.props.accessToken, userData: this.props.userData, logsPagina: [], checkAll: false, selectedCheckBoxes: selected }
+    this.state = { accessToken: this.props.accessToken, userData: this.props.userData, logsPagina: [], checkAll: false, selectedCheckBoxes: selected, ambiente: "TODOS" }
     this.carregaErros = this.carregaErros.bind(this)
     this.findLogById = this.findLogById.bind(this)
     this.initSelectedCheckBoxes = this.initSelectedCheckBoxes.bind(this)
@@ -23,7 +23,7 @@ class ErroListPage extends Component {
     this.showDetails = this.showDetails.bind(this)
     this.criarErros = this.criarErros.bind(this)
 
-    this.carregaErros()
+    this.carregaErros("")
   }
 
   static getDerivedStateFromProps(props) {
@@ -33,10 +33,10 @@ class ErroListPage extends Component {
     return null
   }
 
-  carregaErros() {
+  carregaErros(ambiente) {
     axios({
       method: "GET",
-      url: BACKEND_API.SERVER_URL + '/erro',
+      url: BACKEND_API.SERVER_URL + '/erro' + ambiente,
       headers: {
         "authorization": 'Bearer ' + this.state.accessToken,
         "Access-Control-Allow-Origin": "*",
@@ -44,6 +44,7 @@ class ErroListPage extends Component {
       }
     })
       .then(function (response) {
+        console.log(response)
         if (response.status === 200) {
           this.setState({ logsPagina: response.data.content })
         }
@@ -63,7 +64,14 @@ class ErroListPage extends Component {
   }
 
   ambienteChange = (event) => {
-    console.log(event.target.value)
+    this.setState({ ambiente: event.target.value })
+    if (event.target.value === "TODOS")
+      this.carregaErros("")
+    else
+      this.carregaErros('/ambiente/' + event.target.value)
+
+    this.setState({ selectedCheckBoxes: Array(this.pageSize).fill(false), checkAll: false })
+    console.log(this.state.ambiente)
   }
 
   ordenarPorChange = (event) => {
