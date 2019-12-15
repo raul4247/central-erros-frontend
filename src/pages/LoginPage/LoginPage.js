@@ -10,16 +10,21 @@ class LoginPage extends Component {
     this.state = { username: "teste1@squad6.com.br", password: "senha de teste" }
 
     this.login = this.login.bind(this)
-    this.usernameChange = this.usernameChange.bind(this)
-    this.passwordChange = this.passwordChange.bind(this)
   }
 
-  usernameChange(event) {
+  usernameChange = (event) => {
     this.setState({ username: event.target.value })
   }
 
-  passwordChange(event) {
+  passwordChange = (event) => {
     this.setState({ password: event.target.value })
+  }
+
+  loginSucess = (accessToken) => {
+    this.props.history.push({
+      pathname: '/home',
+      state: { access_token: accessToken, email: this.state.username }
+    })
   }
 
   login() {
@@ -41,15 +46,12 @@ class LoginPage extends Component {
     })
       .then(function (response) {
         if (response.status === 200) {
-          this.props.history.push({
-            pathname: '/home',
-            state: { access_token: response.data.access_token, email: this.state.username }
-          })
+          let accessToken = response.data.access_token
+          this.loginSucess(accessToken)
         }
       }.bind(this))
       .catch(function (error) {
         alert("Não foi possível fazer o Login")
-        console.log(error)
       })
   }
 
