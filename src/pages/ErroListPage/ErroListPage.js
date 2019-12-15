@@ -215,7 +215,7 @@ class ErroListPage extends Component {
             this.state.logsPagina.length > 0 &&
             <div className="row erros-header">
               <div className="col-1 text-center">
-                <input type="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
+                <input type="checkbox" className="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
               </div>
               <div className="col text-center">
                 <p className="erros-header-label">Level</p>
@@ -237,7 +237,7 @@ class ErroListPage extends Component {
                 <div key={log.id}>
                   <div className="row">
                     <div className="col-1 text-center">
-                      <input type="checkbox" checked={this.state.selectedCheckBoxes[index]} value={index} onChange={this.checkboxClick} />
+                      <input type="checkbox" className="checkbox" checked={this.state.selectedCheckBoxes[index]} value={index} onChange={this.checkboxClick} />
                     </div>
                     <LevelLabel log={log} history={this.props.history} onClick={this.showDetails(log.id)} />
                     <div className="col text-center" onClick={this.showDetails(log.id)}>
