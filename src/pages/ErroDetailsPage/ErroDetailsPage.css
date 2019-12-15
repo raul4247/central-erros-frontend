@@ -1,10 +1,23 @@
-.details-card {
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
 .botao-acao {
   margin-top: 15px;
   margin-left: 15px;
   padding: 5px !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .details-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .details-card-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  .details-card {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
 }

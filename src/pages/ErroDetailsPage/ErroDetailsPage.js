@@ -22,7 +22,7 @@ class ErroDetailsPage extends Component {
     return (
       <div>
         <button type="button" className="btn btn-secondary botao-acao" onClick={this.voltarPagina}>Voltar</button>
-        <div className="container-fluid d-flex flex-column">
+        <div className="container-fluid d-flex flex-column details-card-container">
           <div className="card border-0 shadow details-card my-3">
             <div className="card-body">
               <h1 className="font-weight-light text-center">{this.state.log.level} no {this.state.log.endereco} em {this.state.log.data}</h1>
