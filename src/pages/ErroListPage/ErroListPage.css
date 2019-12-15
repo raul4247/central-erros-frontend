@@ -56,3 +56,8 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
