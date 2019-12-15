@@ -215,7 +215,7 @@ class ErroListPage extends Component {
             this.state.logsPagina.length > 0 &&
             <div className="row erros-header">
               <div className="col-1 text-center">
-                <input type="checkbox" className="checkbox" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
+                <input type="checkbox" className="checkbox checkbox-header" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
               </div>
               <div className="col text-center">
                 <p className="erros-header-label">Level</p>
