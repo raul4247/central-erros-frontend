@@ -23,41 +23,6 @@ class CriarErroPage extends Component {
         detalhes: 'Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 4 at Main.main(Main.java:23)',
       }
     },
-    // {
-    //   botao: "",
-    //   erroData: {
-    //     titulo: "",
-    //     detalhes: '',
-    //   }
-    // },
-    // {
-    //   botao: "",
-    //   erroData: {
-    //     titulo: "",
-    //     detalhes: '',
-    //   }
-    // },
-    // {
-    //   botao: "",
-    //   erroData: {
-    //     titulo: "",
-    //     detalhes: '',
-    //   }
-    // },
-    // {
-    //   botao: "",
-    //   erroData: {
-    //     titulo: "",
-    //     detalhes: '',
-    //   }
-    // },
-    // {
-    //   botao: "",
-    //   erroData: {
-    //     titulo: "",
-    //     detalhes: '',
-    //   }
-    // },
   ]
   constructor(props) {
     super(props)

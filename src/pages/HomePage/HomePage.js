@@ -13,7 +13,7 @@ class HomePage extends Component {
     super(props)
     if (this.props.location.state === undefined || props.location.state.email === undefined)
       this.props.history.replace({
-        pathname: '/central-erros-frontend'
+        pathname: '/'
       })
     else {
       this.state = { accessToken: props.location.state.access_token, email: props.location.state.email }
@@ -41,7 +41,7 @@ class HomePage extends Component {
       .catch(function (error) {
         console.log(error)
         this.props.history.replace({
-          pathname: '/central-erros-frontend'
+          pathname: '/'
         })
         alert("Descupe, ocorreu um erro")
       }.bind(this))
@@ -59,10 +59,10 @@ class HomePage extends Component {
           <Switch>
             {
               this.state !== null &&
-              <Route exact path='/central-erros-frontend/home' render={(props) => <ErroListPage {...props} userData={this.state.userData} accessToken={this.state.accessToken} />} />
+              <Route exact path='/home' render={(props) => <ErroListPage {...props} userData={this.state.userData} accessToken={this.state.accessToken} />} />
             }
-            <Route exact path='/central-erros-frontend/home/details' component={ErroDetailsPage} />
-            <Route exact path='/central-erros-frontend/home/criar' component={CriarErroPage} />
+            <Route exact path='/home/details' component={ErroDetailsPage} />
+            <Route exact path='/home/criar' component={CriarErroPage} />
           </Switch>
         </div>
       </div>

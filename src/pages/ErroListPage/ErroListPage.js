@@ -111,7 +111,7 @@ class ErroListPage extends Component {
 
   showDetails = logId => e => {
     this.props.history.push({
-      pathname: '/central-erros-frontend/home/details',
+      pathname: '/home/details',
       state: { log: this.findLogById(logId) }
     })
   }
@@ -169,7 +169,7 @@ class ErroListPage extends Component {
 
   criarErros() {
     this.props.history.push({
-      pathname: '/central-erros-frontend/home/criar',
+      pathname: '/home/criar',
       state: { userData: this.state.userData, accessToken: this.state.accessToken }
     })
   }
