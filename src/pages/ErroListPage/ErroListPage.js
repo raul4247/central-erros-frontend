@@ -5,25 +5,16 @@ import LevelLabel from '../../components/LevelLabel/LevelLabel'
 import './ErroListPage.css'
 
 class ErroListPage extends Component {
-  ambiente = ['TODOS', 'DEV', 'HOMOLOGACAO', 'PRODUCAO']
-  ordenarPor = ['Ordenar por', 'Level', 'Frequência']
+  ambiente = ['Todos', 'DEV', 'HOMOLOGACAO', 'PRODUCAO']
+  ordenarPor = ['Ordenar por', 'level', 'frequencia']
   buscarPor = ['Buscar por', 'Level', 'Descrição', 'Origem']
   pageSize = 8
 
   constructor(props) {
     super(props)
 
-    let selected = Array(this.pageSize).fill(false)
-    this.state = { accessToken: this.props.accessToken, userData: this.props.userData, logsPagina: [], checkAll: false, selectedCheckBoxes: selected, ambiente: "TODOS" }
-    this.carregaErros = this.carregaErros.bind(this)
-    this.findLogById = this.findLogById.bind(this)
-    this.initSelectedCheckBoxes = this.initSelectedCheckBoxes.bind(this)
-    this.updateStatusClick = this.updateStatusClick.bind(this)
-    this.erroNaRequisicao = this.erroNaRequisicao.bind(this)
-    this.showDetails = this.showDetails.bind(this)
-    this.criarErros = this.criarErros.bind(this)
-
-    this.carregaErros("")
+    this.state = { accessToken: this.props.accessToken, userData: this.props.userData, logsPagina: [], checkAll: false, selectedCheckBoxes: Array(this.pageSize).fill(false), ambiente: "Todos", ordenarPor: 'Ordenar por' }
+    this.carregaErros()
   }
 
   static getDerivedStateFromProps(props) {
@@ -33,10 +24,24 @@ class ErroListPage extends Component {
     return null
   }
 
-  carregaErros(ambiente) {
+  filtroEndpoint = () => {
+    let url = ""
+    let ambiente = this.state.ambiente
+    let ordenarPor = this.state.ordenarPor
+
+    if (ambiente !== 'Todos')
+      url += '/ambiente/' + ambiente
+
+    if (ordenarPor !== 'Ordenar por')
+      url += '?sort=' + ordenarPor + ',asc'
+
+    return url
+  }
+
+  carregaErros = () => {
     axios({
       method: "GET",
-      url: BACKEND_API.SERVER_URL + '/erro' + ambiente,
+      url: BACKEND_API.SERVER_URL + '/erro' + this.filtroEndpoint(),
       headers: {
         "authorization": 'Bearer ' + this.state.accessToken,
         "Access-Control-Allow-Origin": "*",
@@ -44,65 +49,42 @@ class ErroListPage extends Component {
       }
     })
       .then(function (response) {
-        console.log(response)
-        if (response.status === 200) {
+        if (response.status === 200)
           this.setState({ logsPagina: response.data.content })
-        }
       }.bind(this))
       .catch(function (error) {
         this.erroNaRequisicao(error)
       }.bind(this))
   }
 
-  initSelectedCheckBoxes() {
+  initSelectedCheckBoxes = () => {
     let selected = Array(this.pageSize).fill(false)
     this.setState({ checkAll: false, selectedCheckBoxes: selected })
   }
 
-  findLogById(id) {
-    return this.state.logsPagina.find(log => log.id === id)
+  setSelectedCheckBox = (state) => {
+    this.setState({ selectedCheckBoxes: Array(this.pageSize).fill(state), checkAll: state })
   }
 
   ambienteChange = (event) => {
-    this.setState({ ambiente: event.target.value })
-    if (event.target.value === "TODOS")
-      this.carregaErros("")
-    else
-      this.carregaErros('/ambiente/' + event.target.value)
-
-    this.setState({ selectedCheckBoxes: Array(this.pageSize).fill(false), checkAll: false })
-    console.log(this.state.ambiente)
+    this.setState({ ambiente: event.target.value }, () => {
+      this.setSelectedCheckBox(false)
+      this.carregaErros()
+    })
   }
 
   ordenarPorChange = (event) => {
-    console.log(event.target.value)
-    if (event.target.value === "Ordenar por") {
-      if (this.state.ambiente === "TODOS") {
-        this.carregaErros("")
-      }
-      else {
-        this.carregaErros('/ambiente/' + this.state.ambiente)
-      }
-    }
-    else {
-      if (this.state.ambiente === "TODOS") {
-        this.carregaErros('?sort=' + event.target.value + ',asc')
-      }
-      else {
-        this.carregaErros('/ambiente/' + this.state.ambiente + '?sort=' + event.target.value + ',asc')
-      }
-    }
-
-    this.setState({ selectedCheckBoxes: Array(this.pageSize).fill(false), checkAll: false })
-    console.log(this.state.ambiente)
-
+    this.setState({ ordenarPor: event.target.value }, () => {
+      this.setSelectedCheckBox(false)
+      this.carregaErros()
+    })
   }
 
   buscarPorChange = (event) => {
     console.log(event.target.value)
   }
 
-  getCheckedBoxes() {
+  getCheckedBoxes = () => {
     let logIds = this.state.logsPagina.filter((log, index) => {
       return this.state.selectedCheckBoxes[index]
     })
@@ -110,18 +92,20 @@ class ErroListPage extends Component {
   }
 
   showDetails = logId => e => {
+    let log = this.state.logsPagina.find(log => log.id === logId)
+
     this.props.history.push({
       pathname: '/home/details',
-      state: { log: this.findLogById(logId) }
+      state: { log: log }
     })
   }
 
-  updateStatusClick = (statusCode) => {
+  arquivarClick = () => {
     let logsIds = this.getCheckedBoxes()
     if (logsIds.length > 0) {
       axios({
         method: "PUT",
-        url: BACKEND_API.SERVER_URL + '/erro/updateStatus/' + statusCode,
+        url: BACKEND_API.SERVER_URL + '/erro/updateStatus/ARQUIVADO',
         headers: {
           "authorization": 'Bearer ' + this.state.accessToken,
           "Access-Control-Allow-Origin": "*",
@@ -159,15 +143,15 @@ class ErroListPage extends Component {
     }
   }
 
-  erroNaRequisicao(errorMsg) {
-    console.log(errorMsg)
+  erroNaRequisicao = (errorMsg) => {
     this.props.history.replace({
-      pathname: '/central-erros-frontend'
+      pathname: '/'
     })
     alert("Descupe, ocorreu um erro")
+    console.log(errorMsg)
   }
 
-  criarErros() {
+  criarErros = () => {
     this.props.history.push({
       pathname: '/home/criar',
       state: { userData: this.state.userData, accessToken: this.state.accessToken }
@@ -207,7 +191,7 @@ class ErroListPage extends Component {
           </ul>
         </div>
         <div>
-          <button type="button" className="btn btn-warning botao-acao" onClick={this.updateStatusClick.bind(this, 'ARQUIVADO')}>Arquivar</button>
+          <button type="button" className="btn btn-warning botao-acao" onClick={this.arquivarClick}>Arquivar</button>
           <button type="button" className="btn btn-success botao-acao" onClick={this.criarErros}>Inserir Novos Erros</button>
         </div>
         <div className="container-fluid content">
