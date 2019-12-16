@@ -15,36 +15,39 @@ class HomePage extends Component {
       this.props.history.replace({
         pathname: '/'
       })
-    else {
+    else
       this.state = { accessToken: props.location.state.access_token, email: props.location.state.email }
-      this.carregarUserData = this.carregarUserData.bind(this)
-
-      this.carregarUserData()
-    }
   }
 
-  carregarUserData() {
-    axios({
-      method: "GET",
-      url: BACKEND_API.SERVER_URL + '/usuario/email/' + this.state.email,
-      headers: {
-        "authorization": 'Bearer ' + this.state.accessToken,
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "multipart/form-data"
-      }
-    })
-      .then(function (response) {
-        console.log(response)
-        if (response.status === 200)
-          this.setState({ userData: response.data })
-      }.bind(this))
-      .catch(function (error) {
-        console.log(error)
-        this.props.history.replace({
-          pathname: '/'
-        })
-        alert("Descupe, ocorreu um erro")
-      }.bind(this))
+  componentDidMount() {
+    if (this.state === null) {
+      this.props.history.replace({
+        pathname: '/'
+      })
+      alert("Sessão expirou!")
+    }
+    else {
+      axios({
+        method: "GET",
+        url: BACKEND_API.SERVER_URL + '/usuario/email/' + this.state.email,
+        headers: {
+          "authorization": 'Bearer ' + this.state.accessToken,
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "multipart/form-data"
+        }
+      })
+        .then(function (response) {
+          if (response.status === 200)
+            this.setState({ userData: response.data })
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error)
+          this.props.history.replace({
+            pathname: '/'
+          })
+          alert("Descupe, ocorreu um erro")
+        }.bind(this))
+    }
   }
 
   render() {

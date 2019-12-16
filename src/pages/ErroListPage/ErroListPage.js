@@ -197,23 +197,23 @@ class ErroListPage extends Component {
         <div className="container-fluid content">
           {
             this.state.logsPagina.length > 0 &&
-            <div className="row erros-header">
-              <div className="col-1 text-center">
-                <input type="checkbox" className="checkbox checkbox-header" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
+            <div>
+              <div className="row erros-header">
+                <div className="col-1 text-center">
+                  <input type="checkbox" className="checkbox checkbox-header" checked={this.state.checkAll} value="checkAll" onChange={this.checkboxClick} />
+                </div>
+                <div className="col text-center">
+                  <p className="erros-header-label">Level</p>
+                </div>
+                <div className="col text-center">
+                  <p className="erros-header-label">Log</p>
+                </div>
+                <div className="col text-center">
+                  <p className="erros-header-label">Eventos</p>
+                </div>
               </div>
-              <div className="col text-center">
-                <p className="erros-header-label">Level</p>
-              </div>
-              <div className="col text-center">
-                <p className="erros-header-label">Log</p>
-              </div>
-              <div className="col text-center">
-                <p className="erros-header-label">Eventos</p>
-              </div>
+              <hr />
             </div>
-          }
-          {
-            this.state.logsPagina.length > 0 && <hr />
           }
           {
             this.state.logsPagina.map((log, index) => {

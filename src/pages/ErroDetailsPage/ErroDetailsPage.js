@@ -8,13 +8,12 @@ class ErroDetailsPage extends Component {
     super(props)
 
     this.state = { log: props.location.state.log, history: props.history }
-    this.voltarPagina = this.voltarPagina.bind(this)
 
     if (typeof this.state.log === 'undefined')
       this.voltarPagina()
   }
 
-  voltarPagina() {
+  voltarPagina = () => {
     this.state.history.goBack()
   }
 
