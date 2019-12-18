@@ -263,12 +263,12 @@ class ErroListPage extends Component {
                     </div>
                     <LevelLabel log={log} history={this.props.history} onClick={this.showDetails(log.id)} />
                     <div className="col text-center" onClick={this.showDetails(log.id)}>
-                      <p className="log">{log.titulo}</p>
+                      <p className="log log-titulo">{log.titulo}</p>
                       <p className="log">{log.endereco}</p>
                       <p className="log">{log.data}</p>
                     </div>
                     <div className="col text-center" onClick={this.showDetails(log.id)} >
-                      <p className="log">{log.frequencia}</p>
+                      <p className="log log-frequencia">{log.frequencia}</p>
                     </div>
                   </div>
                   <hr />

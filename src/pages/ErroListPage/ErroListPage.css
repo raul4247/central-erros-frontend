@@ -46,6 +46,14 @@
   font-weight: 300;
 }
 
+.log-titulo {
+  font-weight: 400;
+}
+
+.log-frequencia {
+  font-size: 2em;
+}
+
 .botao-acao {
   margin-top: 15px;
   margin-left: 15px;
