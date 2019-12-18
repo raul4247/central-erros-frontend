@@ -13,7 +13,18 @@ class ErroListPage extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { accessToken: this.props.accessToken, userData: this.props.userData, logsPagina: [], checkAll: false, selectedCheckBoxes: Array(this.pageSize).fill(false), ambiente: "Todos", ordenarPor: 'Ordenar por' }
+    this.state = {
+      accessToken: this.props.accessToken,
+      userData: this.props.userData,
+      logsPagina: [],
+      checkAll: false,
+      selectedCheckBoxes: Array(this.pageSize).fill(false),
+      ambiente: "Todos",
+      ordenarPor: 'Ordenar por',
+      selectedPages: [],
+      totalPages: 0,
+      activePage: 0
+    }
     this.carregaErros()
   }
 
@@ -28,14 +39,23 @@ class ErroListPage extends Component {
     let url = ""
     let ambiente = this.state.ambiente
     let ordenarPor = this.state.ordenarPor
+    let pageNumber = this.state.activePage
 
     if (ambiente !== 'Todos')
       url += '/ambiente/' + ambiente
 
+    url += '?page=' + pageNumber
+
     if (ordenarPor !== 'Ordenar por')
-      url += '?sort=' + ordenarPor + ',asc'
+      url += '&sort=' + ordenarPor + ',asc'
 
     return url
+  }
+
+  criarArrayDeSelecaoDePagina = (size, active) => {
+    let arr = Array(size).fill("")
+    arr[active] = "active"
+    return arr
   }
 
   carregaErros = () => {
@@ -51,7 +71,14 @@ class ErroListPage extends Component {
       .then(function (response) {
         if (response.status === 200) {
           console.log(response)
-          this.setState({ logsPagina: response.data.content })
+          let selectedPages = this.criarArrayDeSelecaoDePagina(response.data.totalPages, response.data.number)
+          this.setState({
+            logsPagina: response.data.content,
+            totalPages: response.data.totalPages,
+            selectedPages: selectedPages,
+            activePage: response.data.number
+          }, () =>
+            console.log(this.state))
         }
       }.bind(this))
       .catch(function (error) {
@@ -69,14 +96,14 @@ class ErroListPage extends Component {
   }
 
   ambienteChange = (event) => {
-    this.setState({ ambiente: event.target.value }, () => {
+    this.setState({ ambiente: event.target.value, activePage: 0 }, () => {
       this.setSelectedCheckBox(false)
       this.carregaErros()
     })
   }
 
   ordenarPorChange = (event) => {
-    this.setState({ ordenarPor: event.target.value }, () => {
+    this.setState({ ordenarPor: event.target.value, activePage: 0 }, () => {
       this.setSelectedCheckBox(false)
       this.carregaErros()
     })
@@ -158,6 +185,15 @@ class ErroListPage extends Component {
       pathname: '/home/criar',
       state: { userData: this.state.userData, accessToken: this.state.accessToken }
     })
+  }
+
+  paginationChange = (index) => {
+    let selectedPages = this.criarArrayDeSelecaoDePagina(this.state.totalPages, index)
+    this.setState({
+      selectedPages: selectedPages,
+      activePage: index
+    }, () =>
+      this.carregaErros())
   }
 
   render() {
@@ -247,6 +283,17 @@ class ErroListPage extends Component {
             </div>
           }
         </div>
+        <nav>
+          <ul className="pagination justify-content-center paginacao">
+            {
+              this.state.selectedPages.map((value, index) => {
+                return (
+                  <li key={index + 1} className={"page-item " + this.state.selectedPages[index]}><button className="page-link" onClick={this.paginationChange.bind(this, index)}>{index + 1}</button></li>
+                )
+              })
+            }
+          </ul>
+        </nav>
       </div>
     )
   }
