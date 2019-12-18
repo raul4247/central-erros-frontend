@@ -26,7 +26,9 @@ class CriarErroPage extends Component {
   ]
   constructor(props) {
     super(props)
-    this.state = { accessToken: props.location.state.accessToken, userData: props.location.state.userData, history: props.history, level: "INFO", ambiente: "DEV", status: "ATIVO", endereco: "192.168.0.1" }
+    this.state = {
+      accessToken: props.location.state.accessToken, userData: props.location.state.userData, history: props.history, level: "INFO", ambiente: "DEV", status: "ATIVO", endereco: "192.168.0.1"
+    }
     this.voltarPagina = this.voltarPagina.bind(this)
     this.criarErro = this.criarErro.bind(this)
   }
@@ -123,7 +125,7 @@ class CriarErroPage extends Component {
                   }
                 </select>
               </div>
-              <input type="text" className="form-control endereco-input" placeholder="Endereço" onChange={this.enderecoChange} />
+              <input type="text" className="form-control endereco-input" placeholder="Endereço" onChange={this.enderecoChange} value={this.state.endereco} />
               {
                 this.errosMock.map((erro, index) => {
                   return (
