@@ -26,7 +26,7 @@ class CriarErroPage extends Component {
   ]
   constructor(props) {
     super(props)
-    this.state = { accessToken: props.location.state.accessToken, userData: props.location.state.userData, history: props.history, level: "INFO", ambiente: "DEV", status: "ATIVO", endereco: "" }
+    this.state = { accessToken: props.location.state.accessToken, userData: props.location.state.userData, history: props.history, level: "INFO", ambiente: "DEV", status: "ATIVO", endereco: "192.168.0.1" }
     this.voltarPagina = this.voltarPagina.bind(this)
     this.criarErro = this.criarErro.bind(this)
   }
@@ -61,14 +61,14 @@ class CriarErroPage extends Component {
 
   criarErro(index) {
     let erro = this.errosMock[index]
-    erro.erroData['usuario_id'] = this.state.userData.id
+    erro.erroData['usuario'] = { id: this.state.userData.id }
     erro.erroData['endereco'] = this.state.endereco
     erro.erroData['data'] = new Date().toISOString()
     erro.erroData['level'] = this.state.level
     erro.erroData['ambiente'] = this.state.ambiente
     erro.erroData['status'] = this.state.status
 
-    console.log(this.state.accessToken)
+    console.log(erro.erroData['usuario_id'])
 
     axios({
       method: "POST",

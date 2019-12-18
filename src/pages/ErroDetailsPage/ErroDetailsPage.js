@@ -36,7 +36,7 @@ class ErroDetailsPage extends Component {
                 </div>
                 <div className="col text-center" >
                   <h3 className="font-weight-normal">Eventos</h3>
-                  <p className="lead">{this.state.log.eventos}</p>
+                  <p className="lead">{this.state.log.frequencia}</p>
                   <br />
                   <h3 className="font-weight-normal">Coletado por:</h3>
                   <p className="lead">{this.state.log.tokenUsuario} (token de usuário)</p>

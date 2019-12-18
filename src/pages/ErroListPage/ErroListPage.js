@@ -49,8 +49,10 @@ class ErroListPage extends Component {
       }
     })
       .then(function (response) {
-        if (response.status === 200)
+        if (response.status === 200) {
+          console.log(response)
           this.setState({ logsPagina: response.data.content })
+        }
       }.bind(this))
       .catch(function (error) {
         this.erroNaRequisicao(error)
@@ -230,7 +232,7 @@ class ErroListPage extends Component {
                       <p className="log">{log.data}</p>
                     </div>
                     <div className="col text-center" onClick={this.showDetails(log.id)} >
-                      <p className="log">{log.eventos}</p>
+                      <p className="log">{log.frequencia}</p>
                     </div>
                   </div>
                   <hr />
