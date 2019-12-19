@@ -6,6 +6,7 @@ import { BACKEND_API } from '../../consts/Consts'
 import ErroListPage from "../ErroListPage/ErroListPage"
 import ErroDetailsPage from "../ErroDetailsPage/ErroDetailsPage"
 import CriarErroPage from "../CriarErroPage/CriarErroPage"
+import CadastroUsuarioPage from "../CadastroUsuarioPage/CadastroUsuarioPage"
 import './HomePage.css'
 
 class HomePage extends Component {
@@ -67,6 +68,7 @@ class HomePage extends Component {
             }
             <Route exact path='/home/details' component={ErroDetailsPage} />
             <Route exact path='/home/criar' component={CriarErroPage} />
+            <Route exact path='/home/cadastrar' component={CadastroUsuarioPage} />
           </Switch>
         </div>
       </div>

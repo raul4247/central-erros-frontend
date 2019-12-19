@@ -187,6 +187,13 @@ class ErroListPage extends Component {
     })
   }
 
+  cadastrarUsuario = () => {
+    this.props.history.push({
+      pathname: '/home/cadastrar',
+      state: { userData: this.state.userData, accessToken: this.state.accessToken }
+    })
+  }
+
   paginationChange = (index) => {
     let selectedPages = this.criarArrayDeSelecaoDePagina(this.state.totalPages, index)
     this.setState({
@@ -231,6 +238,10 @@ class ErroListPage extends Component {
         <div>
           <button type="button" className="btn btn-warning botao-acao" onClick={this.arquivarClick}>Arquivar</button>
           <button type="button" className="btn btn-success botao-acao" onClick={this.criarErros}>Inserir Novos Erros</button>
+          {
+            this.state.userData !== undefined && this.state.userData.role === "ADMIN" &&
+            <button type="button" className="btn btn-primary botao-acao" onClick={this.cadastrarUsuario}>Criar usuários</button>
+          }
         </div>
         <div className="container-fluid content">
           {
