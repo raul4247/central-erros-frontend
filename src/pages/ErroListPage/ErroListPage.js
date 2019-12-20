@@ -75,15 +75,13 @@ class ErroListPage extends Component {
     })
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response)
           let selectedPages = this.criarArrayDeSelecaoDePagina(response.data.totalPages, response.data.number)
           this.setState({
             logsPagina: response.data.content,
             totalPages: response.data.totalPages,
             selectedPages: selectedPages,
             activePage: response.data.number
-          }, () =>
-            console.log(this.state))
+          })
         }
       }.bind(this))
       .catch(function (error) {

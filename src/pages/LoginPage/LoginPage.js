@@ -7,7 +7,7 @@ import './LoginPage.css'
 class LoginPage extends Component {
   constructor(props) {
     super(props)
-    this.state = { username: "teste1@squad6.com.br", password: "senha de teste" }
+    this.state = { username: "", password: "" }
 
     this.login = this.login.bind(this)
   }

@@ -70,8 +70,6 @@ class CriarErroPage extends Component {
     erro.erroData['ambiente'] = this.state.ambiente
     erro.erroData['status'] = this.state.status
 
-    console.log(erro.erroData['usuario_id'])
-
     axios({
       method: "POST",
       url: BACKEND_API.SERVER_URL + '/erro',
@@ -83,9 +81,7 @@ class CriarErroPage extends Component {
       data: erro.erroData
     })
       .then(function (response) {
-        console.log(response)
-        console.log(response.status)
-        if (response.status === 200) {
+        if (response.status === 201) {
           alert("Sucesso!")
         }
       })
