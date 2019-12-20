@@ -39,7 +39,7 @@ class ErroDetailsPage extends Component {
                   <p className="lead">{this.state.log.frequencia}</p>
                   <br />
                   <h3 className="font-weight-normal">Coletado por:</h3>
-                  <p className="lead">{this.state.log.tokenUsuario} (token de usuário)</p>
+                  <p className="lead">{this.state.log.token}</p>
                 </div>
               </div>
             </div>

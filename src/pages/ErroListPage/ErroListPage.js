@@ -5,6 +5,7 @@ import LevelLabel from '../../components/LevelLabel/LevelLabel'
 import './ErroListPage.css'
 
 class ErroListPage extends Component {
+  status = ['ATIVO', 'ARQUIVADO']
   ambiente = ['Todos', 'DEV', 'HOMOLOGACAO', 'PRODUCAO']
   ordenarPor = ['Ordenar por', 'level', 'frequencia']
   buscarPor = ['Buscar por', 'Level', 'Descrição', 'Origem']
@@ -19,6 +20,7 @@ class ErroListPage extends Component {
       logsPagina: [],
       checkAll: false,
       selectedCheckBoxes: Array(this.pageSize).fill(false),
+      status: "ATIVO",
       ambiente: "Todos",
       ordenarPor: 'Ordenar por',
       selectedPages: [],
@@ -37,6 +39,7 @@ class ErroListPage extends Component {
 
   filtroEndpoint = () => {
     let url = ""
+    let status = this.state.status
     let ambiente = this.state.ambiente
     let ordenarPor = this.state.ordenarPor
     let pageNumber = this.state.activePage
@@ -45,6 +48,8 @@ class ErroListPage extends Component {
       url += '/ambiente/' + ambiente
 
     url += '?page=' + pageNumber
+
+    url += '&status=' + status
 
     if (ordenarPor !== 'Ordenar por')
       url += '&sort=' + ordenarPor + ',asc'
@@ -93,6 +98,13 @@ class ErroListPage extends Component {
 
   setSelectedCheckBox = (state) => {
     this.setState({ selectedCheckBoxes: Array(this.pageSize).fill(state), checkAll: state })
+  }
+
+  statusChange = (event) => {
+    this.setState({ status: event.target.value, activePage: 0 }, () => {
+      this.setSelectedCheckBox(false)
+      this.carregaErros()
+    })
   }
 
   ambienteChange = (event) => {
@@ -210,6 +222,14 @@ class ErroListPage extends Component {
           <ul className="nav nav-select">
             <li className="nav-item">
               <div className="input-group mb-3">
+                <select className="custom-select" onChange={this.statusChange}>
+                  {
+                    this.status.map((i) =>
+                      <option key={i} value={i}>{i}</option>
+                    )
+                  }
+                </select>
+
                 <select className="custom-select" onChange={this.ambienteChange}>
                   {
                     this.ambiente.map((i) =>
@@ -224,13 +244,13 @@ class ErroListPage extends Component {
                     )
                   }
                 </select>
-                <select className="custom-select" onChange={this.buscarPorChange}>
+                {/* <select className="custom-select" onChange={this.buscarPorChange}>
                   {
                     this.buscarPor.map((i) =>
                       <option key={i} value={i}>{i}</option>
                     )
                   }
-                </select>
+                </select> */}
               </div>
             </li>
           </ul>
