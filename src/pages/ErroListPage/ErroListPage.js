@@ -51,8 +51,10 @@ class ErroListPage extends Component {
 
     url += '&status=' + status
 
-    if (ordenarPor !== 'Ordenar por')
+    if (ordenarPor === 'level')
       url += '&sort=' + ordenarPor + ',asc'
+    else if (ordenarPor === 'frequencia')
+      url += '&sort=' + ordenarPor + ',desc'
 
     return url
   }
