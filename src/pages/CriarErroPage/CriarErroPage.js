@@ -23,6 +23,27 @@ class CriarErroPage extends Component {
         detalhes: 'Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 4 at Main.main(Main.java:23)',
       }
     },
+    {
+      botao: "Unauthorized Request",
+      erroData: {
+        titulo: "UnauthorizedRequestException",
+        detalhes: 'Exception in thread "appMain" br.codenation.app.central.Exception: 182 at UserController.main(UserController.java:182)',
+      }
+    },
+    {
+      botao: "Number Format",
+      erroData: {
+        titulo: "NumberFormatException",
+        detalhes: 'Exception in thread "main" java.lang.NumberFormatException: For input string: "10,00" at sun.misc.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:1224) at java.lang.Double.valueOf(Double.java:475) at java.lang.Double.<init>(Double.java:567) at model.analises.AcidezVolatil.calculaAcidezVolatil(AcidezVolatil.java:251) at model.analises.AcidezVolatil.main(AcidezVolatil.java:295)',
+      }
+    },
+    {
+      botao: "Illegal Exception",
+      erroData: {
+        titulo: "IllegalStateException",
+        detalhes: 'java.lang.IllegalStateException: Form too large214053>200000 at org.mortbay.jetty.Request.extractParameters(Request.java:1560) at org.mortbay.jetty.Request.getParameter(Request.java:858) at br.com.stenovoice.filter.SessionFilter.doFilter(SessionFilter.java:63) at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1157) at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:388) at org.mortbay.jetty.security.SecurityHandler.handle(SecurityHandler.java:216) at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:182) at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:765) at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:418) at org.mortbay.jetty.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:230) at org.mortbay.jetty.handler.HandlerCollection.handle(HandlerCollection.java:114) at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:152) at org.mortbay.jetty.Server.handle(Server.java:326) at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:542) at org.mortbay.jetty.HttpConnection$RequestHandler.content(HttpConnection.java:938) at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:755) at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:212) at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:404) at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:409) at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:582)',
+      }
+    },
   ]
   constructor(props) {
     super(props)
